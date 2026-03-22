@@ -1,4 +1,4 @@
 baseURL = 'https://ymorgil.github.io/web/'
-locale = 'en-us'
+locale = 'es'
 title = 'My New Hugo Project'
 theme = "hugo-book"

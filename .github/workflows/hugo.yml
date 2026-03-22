@@ -25,6 +25,7 @@ jobs:
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
+          extended: true        # ← Añade esta línea
 
       - name: Build
         run: hugo --minify

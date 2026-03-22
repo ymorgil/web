@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:1313/web/1.1-control-de-versiones/</loc>
+  </url><url>
+    <loc>http://localhost:1313/web/docker/01-docker/</loc>
+  </url><url>
+    <loc>http://localhost:1313/web/docker/02-docker-vsc/</loc>
+  </url><url>
+    <loc>http://localhost:1313/web/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/web/docker/</loc>
+  </url><url>
+    <loc>http://localhost:1313/web/</loc>
+  </url><url>
+    <loc>http://localhost:1313/web/tags/</loc>
+  </url>
+</urlset>
