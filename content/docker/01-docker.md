@@ -1,3 +1,4 @@
+> # 🐳 Instalación de Docker + WSL + Portainer en Windows
 - [🐳 Instalación de Docker + WSL + Portainer en Windows](#-instalación-de-docker--wsl--portainer-en-windows)
 - [👉 Paso 1: Activar características de Windows (WSL)](#-paso-1-activar-características-de-windows-wsl)
 - [👉 Paso 2: Instalación de WSL + Ubuntu 24.04](#-paso-2-instalación-de-wsl--ubuntu-2404)
@@ -23,9 +24,6 @@
   - [2.4 Construir la imagen](#24-construir-la-imagen)
   - [2.5 Ejecutar el contenedor](#25-ejecutar-el-contenedor)
 - [Resumen](#resumen)
-
-> # 🐳 Instalación de Docker + WSL + Portainer en Windows
-
 Guía paso a paso para preparar un entorno con WSL, Ubuntu 24.04, Docker Desktop y Portainer.
 
 # 👉 Paso 1: Activar características de Windows (WSL)
