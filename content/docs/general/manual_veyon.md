@@ -6,7 +6,7 @@ Veyon es una herramienta de software libre que permite la supervisión y el cont
 
 |  |  |
 |---|---|
-| ![alt text](./img/vey01.PNG) |  ![alt text](./img/vey02.PNG) | 
+| ![alt text](./img/vey01.PNG) |  ![alt text](img/vey02.PNG) | 
 
 ### ¿Qué hacer si winget no instala Veyon?
 En algunos casos, la instalación a través de winget puede no funcionar debido a que no encuentra la última versión disponible o el paquete no está actualizado. Si esto ocurre tendrás que descargarlo desde la web oficial: https://veyon.io/en/. Descarga la última versión estable del instalador manualmente para Windows. Sigue las instrucciones de instalación que aparecen durante el proceso de configuración para completar la instalación de manera manual.
