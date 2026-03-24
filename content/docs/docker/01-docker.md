@@ -26,7 +26,7 @@
 - [Resumen](#resumen)
 Guía paso a paso para preparar un entorno con WSL, Ubuntu 24.04, Docker Desktop y Portainer.
 
-# 👉 Paso 1: Activar características de Windows (WSL)
+## 👉 Paso 1: Activar características de Windows (WSL)
 
 Abrir Características de Windows y activar:
  - Plataforma de máquina virtual

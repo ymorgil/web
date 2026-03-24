@@ -1,9 +1,7 @@
 baseURL = 'https://ymorgil.github.io/web/'
 locale = 'es'
-title = 'My New Hugo Project'
+title = 'Proyecto ymorgil'
+# Tema 
 theme = "hugo-book"
-
-[[menus.after]]
-name = "Mi otro repo"
-url = "https://github.com/ymorgil/asir-add"
-weight = 1
+[params]
+  BookTheme = 'auto'
