@@ -4,7 +4,7 @@ weight: 1
 ---
 
 # **💠 PAUTAS DEL CURSO 2025/2026**
-![pautas](/img/01-pautas.jpg)
+![pautas](/web/img/01-pautas.jpg)
 
 Durante el desarrollo del módulo se tendrán en cuenta los siguientes apartados para la calificación del módulo y de los supuestos, algunos de ellos pueden anular la nota del supuesto a un 0 y otros pueden penalizar con un -0.5.
 

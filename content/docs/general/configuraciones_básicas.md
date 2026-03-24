@@ -30,7 +30,7 @@ Durante el curso se van a trabajar con diferentes máquinas virtuales estas debe
       wd11 - Windows Clente 11
       ws22 - Windows Server 2022
 
-![a](/img/conf01.png)
+![a](/web/img/conf01.png)
 
 ## **🛠️Configuraciones Hardware** 
 
@@ -42,17 +42,17 @@ Las configuraciones de las máquinas dependen de los recursos que tenga el equip
 5.  Sistema EFI activado en todos.
 6.  100GB de disco duro
 
-    ![a](/img/conf02.png)   
+    ![a](/web/img/conf02.png)   
 
 7. Habilitar en General → Avanzado el portapapeles y el arrastrar y soltar.
 
-    ![a](//img/conf03.png)
+    ![a](//web/img/conf03.png)
 
 ## **:computer:Configuraciones Software**
 
 Una vez tengamos las configuraciones hardware realizadas pasaremos a descargarnos las **imágenes iso**, de los diferentes sistemas operativos, las agregamos a la unidad óptica e iniciamos la máquina virtual siguiendo el asistente de instalación. En este apartado es importante poner como nombre de usuario el nombre de alumnado, y como nombre de equipo la clave del sistema operatico y el nombre del alumnado.
 
-  ![a](/img/conf04.png)
+  ![a](/web/img/conf04.png)
 
 ### **:dvd: Configuraciones básicas en Windows**
 
@@ -63,17 +63,17 @@ Las configuraciones básicas se basan en hacer los siguientes pasos en todas las
 Para actualizar el sistema iremos a la pestaña de configuración y en la sección de Windows Update buscaremos y actualizaremos el sistema hasta la última versión disponible. Una vez actualizado comprobaremos que nuestra versión obtenida con las teclas win + R y escribiendo winver en la pestaña de ejecutar coincide con la última del historial de versiones de nuestro sistemas el cual lo obtendremos de la información de la siguiente web oficial: https://learn.microsoft.com/es-es/windows/release-health/
 | | |
 |---|---|
-|![a](/img/conf051.png) | ![a](/img/conf052.png)|
-|![a](/img/conf061.png) | ![a](/img/conf062.png)|
-![a](/img/conf07.png)
+|![a](/web/img/conf051.png) | ![a](/web/img/conf052.png)|
+|![a](/web/img/conf061.png) | ![a](/web/img/conf062.png)|
+![a](/web/img/conf07.png)
 
 #### :two: **ACTUALIZAR GUEST ADDITIONS**
 Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de los complementos del invitado. Para ello vamos a la unidad de CD desde el sistema operativo y ejecutamos el programa y seguimos los pasos del asistente de instalación:
 | | | |
 |---|---|---|
-|![a](/img/conf08.png) | ![a](/img/conf091.png)|![a](/img/conf092.png) |
-|![a](/img/conf093.png) | ![a](/img/conf094.png)| ![a](//img/conf095.png)|
-![a](/img/conf096.png)
+|![a](/web/img/conf08.png) | ![a](/web/img/conf091.png)|![a](/web/img/conf092.png) |
+|![a](/web/img/conf093.png) | ![a](/web/img/conf094.png)| ![a](//web/img/conf095.png)|
+![a](/web/img/conf096.png)
 
 
 #### :three: **PROMPT EN COLOR**
@@ -84,14 +84,14 @@ Para cambiar el color del **prompt** en PowerShell tenemos que hacer un pequeño
 Seguido mediante Powershell como administrador cambiamos las políticas de ejecución en la máquina para que nos permita ejecutar el script: `Set-ExecutionPolicy Unrestricted` y al reiniciar PowerShell ya estaría todo correcto.
 | | |
 |---|---|
-|![a](/img/conf10.png) | ![a](/img/conf11.png)|
-|![a](/img/conf12.png) | ![a](/img/conf13.png)|
+|![a](/web/img/conf10.png) | ![a](/web/img/conf11.png)|
+|![a](/web/img/conf12.png) | ![a](/web/img/conf13.png)|
 
 #### :four: **ALIAS Y ATAJOS**
 Para la creación del atajo de teclas iremos a la ruta del ejecutable de PowerShell `C:\Users\yeray\AppData\Roaming\Microsoft\Windows\StartMenu\Programs\Windows PowerShell` , botón secundario propiedades del archivo, pestaña **Acceso directo** y tecla de método abreviado y pulsamos las teclas que queremos que pasen hacer los atajos para abrir dicho programa. En este caso se ha configurado para que el programa se ejecute como administrador ya que será el que frecuentemente usemos.
 | | | |
 |---|---|---|
-|![a](/img/conf14.png) | ![a](/img/conf15.png)|![a](/img/conf16.png) |
+|![a](/web/img/conf14.png) | ![a](/web/img/conf15.png)|![a](/web/img/conf16.png) |
 
 ### :penguin: **Configuraciones básicas en Linux**
 
@@ -101,16 +101,16 @@ Los siguientes 5 pasos de configuraciones básicas se han de hacer en todas las 
 
 Para actualizar los equipos de Ubuntu debemos de ejecutar el siguiente comando en modo superusuario: `sudo apt update && apt upgrade -y && apt autoremove` a veces la propia terminal nos solicitara algunos comandos más en sus mensajes, deberemos realizarlo hasta que al final de la captura se muestran **cuatro 0** que indican que no faltan paquetes por actualizar ni instalar.
 
-![a](/img/ubu01.png)
+![a](/web/img/ubu01.png)
 
 #### :two: **ACTUALIZAR GUEST ADDITIONS**
 
 Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de los complementos del invitado. A continuación, creamos una carpeta (guest) montamos los directorios del CD y comprobamos su contenido, en él nos encontramos varios programas ejecutables usamos el comando sh para ejecutar las Guestt Additions de Linux y se instalen. A veces nos muestra un error porque necesitamos el paquete bzip2 para poder descomprimir el contenido de las Guest Additions, lo instalamos con `apt bzip2` y después ejecutamos el script.
 
-![a](/img/ubu02.png)
+![a](/web/img/ubu02.png)
 | | |
 |---|---|
-|![a](/img/ubu03.png) | ![a](/img/ubu04.png)|
+|![a](/web/img/ubu03.png) | ![a](/web/img/ubu04.png)|
 
 
 #### :three: **PROMPT EN COLOR**
@@ -123,9 +123,9 @@ Para cambiar el prompt de color debemos de hacer las siguientes instrucciones po
 
 | | |
 |---|---|
-|![a](/img/ubu05.png) | ![a](/img/ubu06.png)|
+|![a](/web/img/ubu05.png) | ![a](/web/img/ubu06.png)|
 
-![a](/img/ubu07.png)
+![a](/web/img/ubu07.png)
 
 
 
@@ -135,7 +135,7 @@ En este paso crearemos un alias que nos va a facilitar el trabajo durante el res
 
 | | |
 |---|---|
-|![a](/img/ubu08.png) | ![a](/img/ubu09.png)|
+|![a](/web/img/ubu08.png) | ![a](/web/img/ubu09.png)|
 
 #### :five: **COLOR DE LOS DIRECTORIOS**
 
@@ -144,25 +144,25 @@ En Linux cuando listamos los diferentes elementos tienes una serie de colores pr
 2. Editar archivo con el nano y buscar donde esta el color de los directorios (variable dir) y cambiar de **34(azul)** a **32(Verde)** como se muestra en la captura.
 3. Reiniciamos la sesión del usuario y comprobamos los cambios.
 
-![a](/img/ubu10.png)
+![a](/web/img/ubu10.png)
 | | |
 |---|---|
-|![a](/img/ubu11.png) | ![a](/img/ubu12.png)|
+|![a](/web/img/ubu11.png) | ![a](/web/img/ubu12.png)|
 
-![a](/img/ubu13.png)
+![a](/web/img/ubu13.png)
 
 ### :warning: Dificultades encontradas
 
 #### Usuario en Windows 11
 En la configuración de Windows 11 nos solicita un correo electrónico para saltarnos este paso deberemos de mostrar la consola con ``SHIFT + F10`` y escribir el comando ``bypassnro`` para reiniciar el proceso de instalación sin pedirte cuenta de correo.
 
-![a](/img/ubu14.png)
+![a](/web/img/ubu14.png)
 
 #### Pantallazo negro en Ubuntu
 
 1. En primer lugar, mirar la comprobación hardware de la máquina y comprobar el tipo de chipset:
 
-![a](/img/ubu15.png)
+![a](/web/img/ubu15.png)
 
 2. En caso de que siga sin funcionar pasamos al método número dos que consiste en seguir las instrucciones del siguiente video: https://youtu.be/LKIJFn6cqVE
    
