@@ -6,7 +6,7 @@ Veyon es una herramienta de software libre que permite la supervisión y el cont
 
 |  |  |
 |---|---|
-| ![alt text](/web/web/img/vey01.PNG) |  ![alt text](/web/web/img/vey02.PNG) | 
+| ![alt text](/web/img/vey01.PNG) |  ![alt text](/web/img/vey02.PNG) | 
 
 ### ¿Qué hacer si winget no instala Veyon?
 En algunos casos, la instalación a través de winget puede no funcionar debido a que no encuentra la última versión disponible o el paquete no está actualizado. Si esto ocurre tendrás que descargarlo desde la web oficial: https://veyon.io/en/. Descarga la última versión estable del instalador manualmente para Windows. Sigue las instrucciones de instalación que aparecen durante el proceso de configuración para completar la instalación de manera manual.
@@ -25,12 +25,12 @@ Cambiar el idioma de la interfaz de usuario a español y en la sección de Auten
 Descargar la clave pública de este mismo repositorio y agregarla en la sección de claves de autentificación.
  - Hay que descargarla en documentos si la pones en el escritorio podría no funcionar.
  - Cuando la agregas no cambiar el nombre, seguir con los valores por defecto
- ![alt text](/web/web/img/vey04.PNG)
+ ![alt text](/web/img/vey04.PNG)
 
 ### 3. Cambiar nombre al equipo
 >Podemos hacerlo más rápido desde terminal abrimos el PowerShell en modo administrador y usamos el siguiente comando `Rename-Computer - NewName *** -Restart` Hay que cambiar los asteriscos por el nuevo nombre del equipo la sintaxis Aula-PC00, ejemplo 301-PC01, R03-PC01… una vez sejecutado el comando se reiniciara el equipo con el nuevo nombre.
 
-![alt text](/web/web/img/vey06.PNG)
+![alt text](/web/img/vey06.PNG)
 
  
 ## Configuración del Veyon profesorado
@@ -50,4 +50,4 @@ En la configuración del Veyon en la pestaña de Ubicaciones y equipos tenemos q
     Los portatiles han de hacer lo mismo agregar su nombre de dispositivo y tener en cuenta que han de estar en la misma red. 
     
     No se obliga en ningún momento a instalarlo en los equipos personales, para todo ello están los equipos de clase en caso de querer hacer el examen en sus propios equipos se ha de instalar este aplicativo
-![alt text](/web/web/img/vey07.PNG)
+![alt text](/web/img/vey07.PNG)

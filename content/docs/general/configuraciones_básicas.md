@@ -46,7 +46,7 @@ Las configuraciones de las máquinas dependen de los recursos que tenga el equip
 
 7. Habilitar en General → Avanzado el portapapeles y el arrastrar y soltar.
 
-    ![a](//web/img/conf03.png)
+    ![a](/web/img/conf03.png)
 
 ## **:computer:Configuraciones Software**
 
