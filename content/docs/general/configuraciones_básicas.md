@@ -87,7 +87,7 @@ Seguido mediante Powershell como administrador cambiamos las políticas de ejecu
 |![a](/web/img/conf10.png) | ![a](/web/img/conf11.png)|
 |![a](/web/img/conf12.png) | ![a](/web/img/conf13.png)|
 
-#### :four: **ALIAS Y ATAJOS**
+> ###  :four: **ALIAS Y ATAJOS**
 Para la creación del atajo de teclas iremos a la ruta del ejecutable de PowerShell `C:\Users\yeray\AppData\Roaming\Microsoft\Windows\StartMenu\Programs\Windows PowerShell` , botón secundario propiedades del archivo, pestaña **Acceso directo** y tecla de método abreviado y pulsamos las teclas que queremos que pasen hacer los atajos para abrir dicho programa. En este caso se ha configurado para que el programa se ejecute como administrador ya que será el que frecuentemente usemos.
 | | | |
 |---|---|---|
@@ -97,7 +97,7 @@ Para la creación del atajo de teclas iremos a la ruta del ejecutable de PowerSh
 
 Los siguientes 5 pasos de configuraciones básicas se han de hacer en todas las máquinas base de Linux en este caso se muestra un ejemplo en Ubuntu server al no tener interfaz gráfica y ser la que presenta mayores dificultades.
 
-#### 1️⃣  **ACTUALIZAR SISTEMAS**
+> ### 1️⃣  ACTUALIZAR SISTEMAS
 
 Para actualizar los equipos de Ubuntu debemos de ejecutar el siguiente comando en modo superusuario: `sudo apt update && apt upgrade -y && apt autoremove` a veces la propia terminal nos solicitara algunos comandos más en sus mensajes, deberemos realizarlo hasta que al final de la captura se muestran **cuatro 0** que indican que no faltan paquetes por actualizar ni instalar.
 
