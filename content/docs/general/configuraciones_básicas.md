@@ -32,7 +32,7 @@ Durante el curso se van a trabajar con diferentes máquinas virtuales estas debe
 
 ![a](/web/img/conf01.png)
 
-## **🛠️Configuraciones Hardware** 
+## 🛠️Configuraciones Hardware
 
 Las configuraciones de las máquinas dependen de los recursos que tenga el equipo real, pero para un correcto funcionamiento y evitar problema se solicitan los siguientes requisitos mínimos:
 1.  Sistemas de 64-bit
@@ -54,11 +54,11 @@ Una vez tengamos las configuraciones hardware realizadas pasaremos a descargarno
 
   ![a](/web/img/conf04.png)
 
-### **:dvd: Configuraciones básicas en Windows**
+## **:dvd: Configuraciones básicas en Windows**
 
 Las configuraciones básicas se basan en hacer los siguientes pasos en todas las máquinas, como ejemplo se van a realizar las mismas para un sistema operativo Windows 11:
 
-#### :one: **ACTUALIZAR SISTEMAS**
+> ### 1️⃣ **ACTUALIZAR SISTEMAS**
 
 Para actualizar el sistema iremos a la pestaña de configuración y en la sección de Windows Update buscaremos y actualizaremos el sistema hasta la última versión disponible. Una vez actualizado comprobaremos que nuestra versión obtenida con las teclas win + R y escribiendo winver en la pestaña de ejecutar coincide con la última del historial de versiones de nuestro sistemas el cual lo obtendremos de la información de la siguiente web oficial: https://learn.microsoft.com/es-es/windows/release-health/
 | | |
@@ -67,7 +67,7 @@ Para actualizar el sistema iremos a la pestaña de configuración y en la secci�
 |![a](/web/img/conf061.png) | ![a](/web/img/conf062.png)|
 ![a](/web/img/conf07.png)
 
-#### :two: **ACTUALIZAR GUEST ADDITIONS**
+> ### 2️⃣ **ACTUALIZAR GUEST ADDITIONS**
 Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de los complementos del invitado. Para ello vamos a la unidad de CD desde el sistema operativo y ejecutamos el programa y seguimos los pasos del asistente de instalación:
 | | | |
 |---|---|---|
@@ -76,7 +76,7 @@ Para la instalación de las Guestt Additions en todos los sistemas el primer pas
 ![a](/web/img/conf096.png)
 
 
-#### :three: **PROMPT EN COLOR**
+> ### 3️⃣ **PROMPT EN COLOR**
 Para cambiar el color del **prompt** en PowerShell tenemos que hacer un pequeño script, para ello abrimos el PowerShell ISE, y creamos un archivo con el nombre "Microsoft.Powershell_profile.ps1" este se guardará en el directorio `C:\Users\user1\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1`
 
 >IMPORTANTE: Hay que respetar el nombre del archivo, la ruta y el código cualquier carácter incorrecto podría significar el no funcionamiento del mismo. Recordar que user1 es el nombre de vuestro usuario en el sistema
@@ -97,13 +97,13 @@ Para la creación del atajo de teclas iremos a la ruta del ejecutable de PowerSh
 
 Los siguientes 5 pasos de configuraciones básicas se han de hacer en todas las máquinas base de Linux en este caso se muestra un ejemplo en Ubuntu server al no tener interfaz gráfica y ser la que presenta mayores dificultades.
 
-#### :one: **ACTUALIZAR SISTEMAS**
+#### 1️⃣  **ACTUALIZAR SISTEMAS**
 
 Para actualizar los equipos de Ubuntu debemos de ejecutar el siguiente comando en modo superusuario: `sudo apt update && apt upgrade -y && apt autoremove` a veces la propia terminal nos solicitara algunos comandos más en sus mensajes, deberemos realizarlo hasta que al final de la captura se muestran **cuatro 0** que indican que no faltan paquetes por actualizar ni instalar.
 
 ![a](/web/img/ubu01.png)
 
-#### :two: **ACTUALIZAR GUEST ADDITIONS**
+#### 2️⃣ **ACTUALIZAR GUEST ADDITIONS**
 
 Para la instalación de las Guestt Additions en todos los sistemas el primer paso es insertar imagen de CD de los complementos del invitado. A continuación, creamos una carpeta (guest) montamos los directorios del CD y comprobamos su contenido, en él nos encontramos varios programas ejecutables usamos el comando sh para ejecutar las Guestt Additions de Linux y se instalen. A veces nos muestra un error porque necesitamos el paquete bzip2 para poder descomprimir el contenido de las Guest Additions, lo instalamos con `apt bzip2` y después ejecutamos el script.
 
@@ -113,7 +113,7 @@ Para la instalación de las Guestt Additions en todos los sistemas el primer pas
 |![a](/web/img/ubu03.png) | ![a](/web/img/ubu04.png)|
 
 
-#### :three: **PROMPT EN COLOR**
+> ### 3️⃣ **PROMPT EN COLOR**
 Para cambiar el prompt de color debemos de hacer las siguientes instrucciones por **cada usuario** del sistema, en este manual se hará solo para el usuario administrador del root:
 1. Iniciamos sesión en el usuario y vamos a su directorio personal con el comando `cd ~`, a continuación, modificamos el archivo oculto bashrc con el siguiente comando: `nano .bashrc`
 2. Debemos hacer dos cambios:
