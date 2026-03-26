@@ -32,7 +32,7 @@ Durante el curso se van a trabajar con diferentes máquinas virtuales estas debe
 
 ![a](/web/img/conf01.png)
 
-## 🛠️Configuraciones Hardware
+> ## 🛠️Configuraciones Hardware
 
 Las configuraciones de las máquinas dependen de los recursos que tenga el equipo real, pero para un correcto funcionamiento y evitar problema se solicitan los siguientes requisitos mínimos:
 1.  Sistemas de 64-bit
@@ -58,7 +58,7 @@ Una vez tengamos las configuraciones hardware realizadas pasaremos a descargarno
 
 Las configuraciones básicas se basan en hacer los siguientes pasos en todas las máquinas, como ejemplo se van a realizar las mismas para un sistema operativo Windows 11:
 
-> ### 1️⃣ **ACTUALIZAR SISTEMAS**
+>> ### 1️⃣ **ACTUALIZAR SISTEMAS**
 
 Para actualizar el sistema iremos a la pestaña de configuración y en la sección de Windows Update buscaremos y actualizaremos el sistema hasta la última versión disponible. Una vez actualizado comprobaremos que nuestra versión obtenida con las teclas win + R y escribiendo winver en la pestaña de ejecutar coincide con la última del historial de versiones de nuestro sistemas el cual lo obtendremos de la información de la siguiente web oficial: https://learn.microsoft.com/es-es/windows/release-health/
 | | |
