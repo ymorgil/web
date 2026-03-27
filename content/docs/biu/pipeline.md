@@ -30,7 +30,7 @@ cd pipeline
 
 python3 -m venv venv # Crear un entorno en python
 
-source ento/bin/activate  # Activar (siempre antes de trabajar)
+source venv/bin/activate  # Activar (siempre antes de trabajar)
 
 deactivate  # Desactivar en caso necesario
 ```
@@ -43,12 +43,12 @@ mkdir airflow
 cd airflow
 
 # Variable de entorno 
-export AIRFLOW_HOME=`pwd`
+export AIRFLOW_HOME=$(pwd)
 echo $AIRFLOW_HOME  # Para comprobar
 
 # Instalar  y arrancar Airflow
 pip install apache-airflow 
-airflow standalone
+airflow standalone # Si levantas sin la variable de entorno problemas al iniciar
 
 # Acceder
 http://localhost:8080   # o el puerto que uses
@@ -105,6 +105,9 @@ Vamos a la siguiente web y seguimos los pasos [Spark Standalone Mode](https://sp
 Donde además de del master arrancaremos un workers y comprobaremos que esta activo.
 
 ## Creación del DAG
+Vamos a la siguiente web [Dags](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)
+
+![a](/web/img/img-dag.png)
 
 >### Plantilla mínima para DAG de Airflow ###
 
