@@ -107,7 +107,7 @@ Donde además de del master arrancaremos un workers y comprobaremos que esta act
 ## Creación del DAG
 Vamos a la siguiente web [Dags](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)
 
-![a](/web/img/img-dag.png)
+![img dag](/web/img/img-dag.png)
 
 >### Plantilla mínima para DAG de Airflow ###
 
