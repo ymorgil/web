@@ -4,4 +4,6 @@ weight: 1
 bookCollapseSection: true
 ---
 
-Hola
+# 📁 General
+
+Apuntes generales sobre administración de sistemas.
