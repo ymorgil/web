@@ -1,24 +1,22 @@
+---
+title: "Configuraciones básicas"
+weight: 2
+---
+
 # **💠 Configuraciones básicas**
 
 
-- [**:cyclone: Configuraciones básicas**](#cyclone-configuraciones-básicas)
-- [**🛠️Configuraciones Hardware**](#️configuraciones-hardware)
-- [**:computer:Configuraciones Software**](#computerconfiguraciones-software)
+- [**💠 Configuraciones básicas**](#-configuraciones-básicas)
+  - [**:computer:Configuraciones Software**](#computerconfiguraciones-software)
   - [**:dvd: Configuraciones básicas en Windows**](#dvd-configuraciones-básicas-en-windows)
-    - [:one: **ACTUALIZAR SISTEMAS**](#one-actualizar-sistemas)
-    - [:two: **ACTUALIZAR GUEST ADDITIONS**](#two-actualizar-guest-additions)
-    - [:three: **PROMPT EN COLOR**](#three-prompt-en-color)
-    - [:four: **ALIAS Y ATAJOS**](#four-alias-y-atajos)
-  - [:penguin: **Configuraciones básicas en Linux**](#penguin-configuraciones-básicas-en-linux)
-    - [:one: **ACTUALIZAR SISTEMAS**](#one-actualizar-sistemas-1)
-    - [:two: **ACTUALIZAR GUEST ADDITIONS**](#two-actualizar-guest-additions-1)
-    - [:three: **PROMPT EN COLOR**](#three-prompt-en-color-1)
-    - [:four: **ALIAS Y ATAJOS**s](#four-alias-y-atajoss)
-    - [:five: **COLOR DE LOS DIRECTORIOS**](#five-color-de-los-directorios)
-  - [:warning: Dificultades encontradas](#warning-dificultades-encontradas)
-    - [Usuario en Windows 11](#usuario-en-windows-11)
-    - [Pantallazo negro en Ubuntu](#pantallazo-negro-en-ubuntu)
-    - [Problemas con la tortuga.](#problemas-con-la-tortuga)
+    - [:penguin: **Configuraciones básicas en Linux**](#penguin-configuraciones-básicas-en-linux)
+      - [2️⃣ **ACTUALIZAR GUEST ADDITIONS**](#2️⃣-actualizar-guest-additions)
+      - [:four: **ALIAS Y ATAJOS**s](#four-alias-y-atajoss)
+      - [:five: **COLOR DE LOS DIRECTORIOS**](#five-color-de-los-directorios)
+    - [:warning: Dificultades encontradas](#warning-dificultades-encontradas)
+      - [Usuario en Windows 11](#usuario-en-windows-11)
+      - [Pantallazo negro en Ubuntu](#pantallazo-negro-en-ubuntu)
+      - [Problemas con la tortuga.](#problemas-con-la-tortuga)
 
 ---
 Durante el curso se van a trabajar con diferentes máquinas virtuales estas deben tener las configuraciones básicas solicitadas y realizar una ova de las mismas despues de configurarlas, para cada supuesto se harán clonaciones y se trabajará sobre estas. 
