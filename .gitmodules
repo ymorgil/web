@@ -4,3 +4,9 @@
 [submodule "content/docs/asir-add"]
 	path = content/docs/asir-add
 	url = https://github.com/ymorgil/asir-add
+[submodule "add"]
+	path = add
+	url = https://github.com/ymorgil/add
+[submodule "content/docs/add"]
+	path = content/docs/add
+	url = https://github.com/ymorgil/add
