@@ -1,4 +1,4 @@
-# 👋 Hola, soy Yeray Moreno Gil
+# 👋 Hola, soy Yeray Moreno Gil .
 
 > *"La tecnología se vuelve poderosa solo cuando sabemos cómo usarla."*
 
