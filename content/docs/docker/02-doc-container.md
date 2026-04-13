@@ -1,11 +1,11 @@
 ---
-title: "Docker: Guía Completa de Contenedores"
+title: "Docker: Guía"
 weight: 2
 ---
 # 🐳 Docker: Guía Completa de Contenedores
 
 ## Índice
-
+---
 1. [Introducción a los Contenedores](#introducción-a-los-contenedores)
 2. [¿Qué es Docker?](#qué-es-docker)
 3. [Imágenes](#imágenes)
@@ -15,21 +15,19 @@ weight: 2
 7. [Dockerfile](#dockerfile)
 8. [Docker Compose](#docker-compose)
 
----
-
 ## Introducción a los Contenedores
-
+---
 No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de **incompatibilidad de entornos**.
 
 Para los desarrolladores esto supone un problema constante: en un equipo de trabajo con sistemas heterogéneos, cada uno necesita las mismas dependencias instaladas, con las mismas versiones, lo que desemboca en el conocido problema de **"en mi máquina funciona"**.
 
-### ¿Qué es un contenedor?
+### **¿Qué es un contenedor?**
 
 Un contenedor es una **unidad ligera y portátil** que permite empaquetar una aplicación junto con todas sus dependencias (bibliotecas, configuraciones y binarios) en un entorno aislado.
 
 A diferencia de las máquinas virtuales, los contenedores **no incluyen un sistema operativo completo**: comparten el núcleo (kernel) del sistema operativo del anfitrión, lo que los hace más eficientes en consumo de recursos (memoria y CPU).
 
-### Contenedor vs. Máquina Virtual
+### **Contenedor vs. Máquina Virtual**
 
 | Característica | Contenedor | Máquina Virtual |
 |---|---|---|
@@ -40,15 +38,13 @@ A diferencia de las máquinas virtuales, los contenedores **no incluyen un siste
 | Aislamiento | Proceso/aplicación | Sistema completo |
 | Eficiencia de recursos | Alta | Menor |
 
-### Beneficios de los contenedores
+### **Beneficios de los contenedores**
 
-**Portabilidad:** Al empaquetar la aplicación con todas sus dependencias, se elimina la posibilidad de problemas relacionados con configuraciones del SO, bibliotecas o versiones de software. Un contenedor funciona igual en local, en staging y en producción.
+- **Portabilidad:** Al empaquetar la aplicación con todas sus dependencias, se elimina la posibilidad de problemas relacionados con configuraciones del SO, bibliotecas o versiones de software. Un contenedor funciona igual en local, en staging y en producción.
+- **Eficiencia:** Comparten el núcleo del SO anfitrión en lugar de requerir un sistema operativo completo para cada instancia. El tiempo de arranque es casi instantáneo y el consumo de CPU/memoria/almacenamiento es mínimo comparado con las VMs.
+- **Escalabilidad:** Ideales para arquitecturas de microservicios. Cada servicio se ejecuta en su propio contenedor y se puede escalar de forma independiente. Combinados con orquestadores como Kubernetes, permiten la gestión automatizada de la escalabilidad horizontal y vertical.
 
-**Eficiencia:** Comparten el núcleo del SO anfitrión en lugar de requerir un sistema operativo completo para cada instancia. El tiempo de arranque es casi instantáneo y el consumo de CPU/memoria/almacenamiento es mínimo comparado con las VMs.
-
-**Escalabilidad:** Ideales para arquitecturas de microservicios. Cada servicio se ejecuta en su propio contenedor y se puede escalar de forma independiente. Combinados con orquestadores como Kubernetes, permiten la gestión automatizada de la escalabilidad horizontal y vertical.
-
-### Breve historia
+### **Breve historia**
 
 | Año | Hito |
 |---|---|
@@ -59,10 +55,10 @@ A diferencia de las máquinas virtuales, los contenedores **no incluyen un siste
 | 2020+ | Alternativas como **Podman** emergen: sin daemon, ejecución rootless |
 | Actualidad | Componente esencial de la infraestructura moderna, microservicios y DevOps |
 
----
+
 
 ## ¿Qué es Docker?
-
+---
 Docker es la **plataforma de contenedores más popular del mundo**. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft.
 
 ### Arquitectura de Docker
@@ -71,7 +67,7 @@ Docker sigue una arquitectura **cliente-servidor**:
 
 ```
 ┌─────────────┐        REST API        ┌──────────────────────────────┐
-│  Docker CLI │ ─────────────────────▶ │        Docker Daemon         │
+│  Docker CLI │ ────────────────────▶ │        Docker Daemon         │
 │  (cliente)  │                        │          (dockerd)           │
 └─────────────┘                        │                              │
                                        │  ┌──────────┐ ┌──────────┐  │
@@ -83,15 +79,14 @@ Docker sigue una arquitectura **cliente-servidor**:
                                        └──────────────────────────────┘
 ```
 
-### Componentes principales
+### **Componentes principales**
 
 **Docker Engine** es el núcleo de la plataforma y está compuesto por:
-
 - **Daemon de Docker (`dockerd`):** servicio en segundo plano que gestiona imágenes, contenedores, redes y volúmenes. Responde a las solicitudes del cliente.
 - **CLI de Docker:** interfaz de línea de comandos para interactuar con Docker (`docker run`, `docker build`, `docker ps`, etc.).
 - **API REST de Docker:** interfaz programática para comunicarse con el daemon, utilizada tanto por la CLI como por aplicaciones externas.
 
-### Herramientas del ecosistema Docker
+### **Herramientas del ecosistema Docker**
 
 | Herramienta | Descripción |
 |---|---|
@@ -103,7 +98,7 @@ Docker sigue una arquitectura **cliente-servidor**:
 | **Docker CLI** | Interfaz de línea de comandos |
 | **Docker Volume** | Gestión de almacenamiento persistente |
 
-### Comandos generales esenciales
+### **Comandos generales esenciales**
 
 ```bash
 docker version              # Muestra la versión de Docker
@@ -113,65 +108,20 @@ docker login                # Inicia sesión en Docker Hub
 docker logout               # Cierra sesión
 ```
 
----
-
 ## Imágenes
-
+---
 Una imagen Docker es un **paquete inmutable de solo lectura** que contiene todo lo necesario para ejecutar una aplicación: código, ejecutables, librerías, configuraciones, variables de entorno y el sistema de archivos que usarán los contenedores.
 
-### Conceptos clave
-
+**Conceptos clave**: 
 - **Plantilla de solo lectura:** Las imágenes no se modifican. A partir de una imagen se crean los contenedores (instancias en ejecución).
 - **Sistema de capas (layers):** Las imágenes se construyen en capas apiladas, como una cebolla. Cada instrucción del Dockerfile genera una nueva capa. Las capas son inmutables y se pueden compartir entre imágenes, lo que ahorra espacio y acelera las descargas.
 - **Tags (etiquetas):** Identifican versiones de una imagen. Por ejemplo, `ubuntu:22.04` o `nginx:latest`.
 - **Imagen base:** Toda imagen parte de otra imagen (`FROM`). Las imágenes base suelen ser distribuciones Linux minimalistas como Alpine (~5 MB), Debian slim, o imágenes oficiales de servicios.
 
-### Analogía imagen / contenedor
+>**Analogía imagen / contenedor**
+La imagen es el **ejecutable** (binario); el contenedor es la **instancia en ejecución** (proceso). De la misma imagen puedes lanzar múltiples contenedores simultáneamente.
 
-> La imagen es el **ejecutable** (binario); el contenedor es la **instancia en ejecución** (proceso). De la misma imagen puedes lanzar múltiples contenedores simultáneamente.
-
-### Comandos de imágenes
-
-```bash
-# Listar imágenes locales
-docker image ls
-docker images                      # equivalente
-
-# Descargar una imagen desde Docker Hub
-docker image pull ubuntu
-docker pull ubuntu                 # equivalente
-docker pull ubuntu:22.04           # versión específica
-docker pull ubuntu:latest          # última versión (por defecto)
-
-# Construir una imagen desde un Dockerfile
-docker image build -t mi-app:1.0 .
-docker build -t mi-app:1.0 .       # equivalente
-
-# Ver detalles de una imagen
-docker image inspect ubuntu
-
-# Historial de capas de una imagen
-docker image history ubuntu
-
-# Etiquetar una imagen
-docker image tag mi-app:1.0 mi-usuario/mi-app:1.0
-
-# Subir una imagen a Docker Hub
-docker image push mi-usuario/mi-app:1.0
-docker push mi-usuario/mi-app:1.0  # equivalente
-
-# Eliminar una imagen
-docker image rm ubuntu
-docker rmi ubuntu                  # equivalente
-
-# Eliminar imágenes no utilizadas (dangling)
-docker image prune
-
-# Eliminar TODAS las imágenes no utilizadas
-docker image prune -a
-```
-
-### Tabla de comandos de imágenes
+### **Comandos de imágenes**
 
 | Comando | Descripción |
 |---|---|
@@ -185,7 +135,25 @@ docker image prune -a
 | `docker image rm` | Elimina una imagen |
 | `docker image prune` | Elimina imágenes no utilizadas |
 
-### Registros de imágenes
+```bash
+# Comandos más utilizados
+
+docker image ls                    # Listar imágenes locales
+docker images                      # equivalente
+
+docker image build -t mi-app:1.0 . # Construir una imagen desde un Dockerfile
+docker build -t mi-app:1.0 .       # equivalente
+
+docker image inspect ubuntu        # Ver detalles de una imagen
+docker image history ubuntu        # Historial de capas de una imagen
+
+docker image rm ubuntu             # Eliminar una imagen
+docker rmi ubuntu                  # equivalente
+docker image prune                 # Eliminar imágenes no utilizadas (dangling)
+docker image prune -a              # Eliminar TODAS las imágenes no utilizadas
+```
+
+### **Registros de imágenes**
 
 **Docker Hub** (`hub.docker.com`) es el registro público oficial. Contiene:
 - Imágenes **oficiales** (mantenidas por Docker y los propios proyectos): `nginx`, `postgres`, `python`, `node`, `ubuntu`...
@@ -195,108 +163,28 @@ docker image prune -a
 Otros registros populares: GitHub Container Registry (`ghcr.io`), Google Container Registry (`gcr.io`), Amazon ECR, Azure Container Registry.
 
 ```bash
-# Buscar imágenes en Docker Hub
-docker search nginx
+docker search nginx                                 # Buscar imágenes en Docker Hub
 
-# Descargar desde un registro privado
-docker pull mi-registro.empresa.com/mi-app:1.0
+docker image pull ubuntu                            # Descargar una imagen desde Docker Hub
+docker pull ubuntu                                  # equivalente
+docker pull ubuntu:22.04                            # versión específica
+docker pull ubuntu:latest                           # última versión (por defecto)
+
+docker image tag mi-app:1.0 mi-usuario/mi-app:1.0   # Etiquetar una imagen
+docker image push mi-usuario/mi-app:1.0             # Subir una imagen a Docker Hub
+docker push mi-usuario/mi-app:1.0                   # equivalente
 ```
-
----
 
 ## Contenedores
-
+---
 Un contenedor es una **instancia ejecutable de una imagen**. Se crea a partir de ella y representa el proceso en ejecución de la aplicación con su entorno aislado.
-
-### Ciclo de vida de un contenedor
-
-```
-            docker create
-imagen ─────────────────▶ CREATED
-                                │
-                    docker start│
-                                ▼
-                            RUNNING ◀──── docker restart
-                                │
-              docker stop/kill  │
-                                ▼
-                            STOPPED/EXITED
-                                │
-                    docker rm   │
-                                ▼
-                           (eliminado)
-```
-
-### Características
-
+**Características:**
 - Puede tener **más de un proceso** en ejecución, aunque la buena práctica es **un proceso por contenedor**.
 - Está **aislado** de otros contenedores y del host (red, sistema de archivos, procesos).
 - Cuando se elimina un contenedor, **se pierden los datos** que no estén en un volumen persistente.
 - Se puede conectar a redes, adjuntar volúmenes y publicar puertos.
 
 ### Comandos de contenedores
-
-```bash
-# Crear y ejecutar un contenedor
-docker container run nginx
-docker run nginx                   # equivalente
-
-# Opciones comunes de docker run:
-docker run -d nginx                    # -d: segundo plano (detached)
-docker run -it ubuntu bash             # -it: modo interactivo + terminal
-docker run --name mi-nginx nginx       # --name: asignar nombre
-docker run -p 8080:80 nginx            # -p: mapear puertos host:contenedor
-docker run -e VAR=valor nginx          # -e: variable de entorno
-docker run -v /host:/contenedor nginx  # -v: montar volumen
-docker run --rm nginx                  # --rm: eliminar al parar
-docker run --network mi-red nginx      # --network: conectar a red
-
-# Listar contenedores en ejecución
-docker container ls
-docker ps                          # equivalente
-
-# Listar TODOS los contenedores (incluidos parados)
-docker container ls -a
-docker ps -a                       # equivalente
-
-# Iniciar/detener/reiniciar un contenedor
-docker container start mi-nginx
-docker container stop mi-nginx
-docker container restart mi-nginx
-
-# Pausar/reanudar
-docker container pause mi-nginx
-docker container unpause mi-nginx
-
-# Eliminar un contenedor (debe estar parado)
-docker container rm mi-nginx
-docker rm mi-nginx                 # equivalente
-docker rm -f mi-nginx              # forzar eliminación aunque esté activo
-
-# Ver logs de un contenedor
-docker container logs mi-nginx
-docker logs -f mi-nginx            # seguir logs en tiempo real
-docker logs --tail 100 mi-nginx    # últimas 100 líneas
-
-# Ejecutar un comando en un contenedor en ejecución
-docker container exec mi-nginx ls /etc/nginx
-docker exec -it mi-nginx bash      # abrir terminal interactivo
-
-# Información detallada del contenedor
-docker container inspect mi-nginx
-
-# Estadísticas de uso de recursos
-docker stats mi-nginx
-
-# Copiar archivos entre host y contenedor
-docker container cp mi-nginx:/etc/nginx/nginx.conf ./nginx.conf
-docker cp ./index.html mi-nginx:/usr/share/nginx/html/
-
-# Eliminar todos los contenedores parados
-docker container prune
-```
-
-### Tabla de comandos de contenedores
 
 | Comando | Descripción |
 |---|---|
@@ -314,7 +202,59 @@ docker container prune
 | `docker container prune` | Elimina todos los contenedores parados |
 | `docker stats` | Estadísticas de recursos en tiempo real |
 
-### Información del comando `docker ps`
+```bash
+
+docker container run nginx # Crear y ejecutar un contenedor
+docker run nginx                   # equivalente
+
+# Opciones comunes de docker run:
+docker run -d nginx                    # -d: segundo plano (detached)
+docker run -it ubuntu bash             # -it: modo interactivo + terminal
+docker run --name mi-nginx nginx       # --name: asignar nombre
+docker run -p 8080:80 nginx            # -p: mapear puertos host:contenedor
+docker run -e VAR=valor nginx          # -e: variable de entorno
+docker run -v /host:/contenedor nginx  # -v: montar volumen
+docker run --rm nginx                  # --rm: eliminar al parar
+docker run --network mi-red nginx      # --network: conectar a red
+
+docker container ls # Listar contenedores en ejecución
+docker ps                          # equivalente
+
+docker container ls -a # Listar TODOS los contenedores (incluidos parados)
+docker ps -a                       # equivalente
+
+# Iniciar/detener/reiniciar un contenedor
+docker container start mi-nginx
+docker container stop mi-nginx
+docker container restart mi-nginx
+
+# Pausar/reanudar
+docker container pause mi-nginx
+docker container unpause mi-nginx
+
+docker container rm mi-nginx # Eliminar un contenedor (debe estar parado)
+docker rm mi-nginx                 # equivalente
+docker rm -f mi-nginx              # forzar eliminación aunque esté activo
+
+docker container logs mi-nginx # Ver logs de un contenedor
+docker logs -f mi-nginx            # seguir logs en tiempo real
+docker logs --tail 100 mi-nginx    # últimas 100 líneas
+
+docker container exec mi-nginx ls /etc/nginx  # Ejecutar un comando en un contenedor en ejecución
+docker exec -it mi-nginx bash      # abrir terminal interactivo
+
+docker container inspect mi-nginx  # Información detallada del contenedor
+
+docker stats mi-nginx  # Estadísticas de uso de recursos
+
+# Copiar archivos entre host y contenedor
+docker container cp mi-nginx:/etc/nginx/nginx.conf ./nginx.conf
+docker cp ./index.html mi-nginx:/usr/share/nginx/html/
+
+docker container prune  # Eliminar todos los contenedores parados
+```
+
+### **Información del comando `docker ps`**
 
 Columnas que muestra `docker ps -a`:
 
@@ -328,10 +268,10 @@ Columnas que muestra `docker ps -a`:
 | `PORTS` | Mapeo de puertos |
 | `NAMES` | Nombre del contenedor (aleatorio si no se especifica) |
 
----
+
 
 ## Redes
-
+---
 Las redes Docker permiten definir **cómo se comunican los contenedores** entre sí y con el exterior. El componente principal que gestiona la conectividad es **libnetwork**.
 
 ### Tipos de redes en Docker
@@ -380,7 +320,18 @@ docker run -d --name db --network mi-red postgres
 # Ahora 'app' puede llegar a 'db' usando su nombre como hostname
 ```
 
-### Comandos de redes
+### **Comandos de redes**
+
+| Comando | Descripción |
+|---|---|
+| `docker network ls` | Lista todas las redes |
+| `docker network create` | Crea una nueva red |
+| `docker network inspect` | Información detallada de una red |
+| `docker network connect` | Conecta un contenedor a una red |
+| `docker network disconnect` | Desconecta un contenedor de una red |
+| `docker network rm` | Elimina una red |
+| `docker network prune` | Elimina redes no utilizadas |
+
 
 ```bash
 # Listar todas las redes
@@ -407,18 +358,6 @@ docker network rm mi-red
 docker network prune
 ```
 
-### Tabla de comandos de redes
-
-| Comando | Descripción |
-|---|---|
-| `docker network ls` | Lista todas las redes |
-| `docker network create` | Crea una nueva red |
-| `docker network inspect` | Información detallada de una red |
-| `docker network connect` | Conecta un contenedor a una red |
-| `docker network disconnect` | Desconecta un contenedor de una red |
-| `docker network rm` | Elimina una red |
-| `docker network prune` | Elimina redes no utilizadas |
-
 ### Publicación de puertos
 
 ```bash
@@ -428,10 +367,9 @@ docker run -p 127.0.0.1:8080:80 nginx # solo desde localhost
 docker run -P nginx                   # mapeo automático de todos los puertos expuestos
 ```
 
----
 
 ## Volúmenes
-
+---
 Un volumen Docker permite **conservar los datos más allá del ciclo de vida de un contenedor**. Sin volúmenes, todos los datos generados dentro de un contenedor se pierden cuando este se elimina.
 
 ### Casos de uso
@@ -474,6 +412,13 @@ docker run -d --tmpfs /tmp nginx
 - **Escalabilidad:** Facilitan la distribución de datos en entornos orquestados.
 
 ### Comandos de volúmenes
+| Comando | Descripción |
+|---|---|
+| `docker volume create` | Crea un nuevo volumen |
+| `docker volume ls` | Lista todos los volúmenes |
+| `docker volume inspect` | Información detallada del volumen |
+| `docker volume rm` | Elimina un volumen |
+| `docker volume prune` | Elimina volúmenes no utilizados |
 
 ```bash
 # Crear un volumen
@@ -501,20 +446,9 @@ docker run -d --mount source=mi-volumen,target=/datos mi-app
 docker run -d -v mi-volumen:/datos:ro mi-app
 ```
 
-### Tabla de comandos de volúmenes
-
-| Comando | Descripción |
-|---|---|
-| `docker volume create` | Crea un nuevo volumen |
-| `docker volume ls` | Lista todos los volúmenes |
-| `docker volume inspect` | Información detallada del volumen |
-| `docker volume rm` | Elimina un volumen |
-| `docker volume prune` | Elimina volúmenes no utilizados |
-
----
 
 ## Dockerfile
-
+---
 Un **Dockerfile** es un archivo de texto con una serie de instrucciones que Docker utiliza para construir una imagen de forma automatizada y reproducible. Cada instrucción genera una nueva **capa** en la imagen.
 
 ### Estructura básica
@@ -686,24 +620,19 @@ build
 
 > 📖 Documentación oficial de referencia: https://docs.docker.com/engine/reference/builder/
 
----
 
 ## Docker Compose
-
-**Docker Compose** es una herramienta para **definir y ejecutar aplicaciones Docker multi-contenedor** mediante un archivo YAML (`docker-compose.yml` o `compose.yaml`). Con un solo comando se crean e inician todos los servicios de la aplicación.
-
-### Casos de uso
-
+---
+**Docker Compose** es una herramienta para **definir y ejecutar aplicaciones Docker multi-contenedor** mediante un archivo YAML (`docker-compose.yml`). Con un solo comando se crean e inician todos los servicios de la aplicación.
+**Casos de uso**
 - Aplicaciones con varios servicios (frontend + backend + base de datos + cache...).
 - Entornos de desarrollo reproducibles.
 - Testing e integración continua.
 - Despliegues en entornos sencillos (staging, desarrollo).
 
-### Estructura del archivo `docker-compose.yml`
+### **Estructura del archivo `docker-compose.yml`**
 
 ```yaml
-version: '3.8'         # Versión del formato (puede omitirse en Compose V2)
-
 services:              # Definición de los contenedores
   nombre-servicio:
     image: ...
@@ -721,19 +650,15 @@ networks:              # Definición de redes
   nombre-red:
 ```
 
-### Ejemplo completo: Aplicación web + Base de datos
-
+### **Ejemplo completo: Aplicación web + Base de datos**
 ```yaml
-version: '3.8'
-
 services:
-
   web:
-    build: .                          # Construye desde el Dockerfile del directorio actual
+    build: .                # Construye desde el Dockerfile del directorio actual
     image: mi-app:latest
     container_name: mi-web
     ports:
-      - "8080:80"                     # host:contenedor
+      - "8080:80"           # host:contenedor
     environment:
       - DATABASE_URL=postgres://user:pass@db:5432/midb
       - DEBUG=false
@@ -773,11 +698,9 @@ networks:
     driver: bridge
 ```
 
-### Ejemplo: Nginx + PHP-FPM + MySQL
+### **Ejemplo: Nginx + PHP-FPM + MySQL**
 
 ```yaml
-version: '3.8'
-
 services:
   nginx:
     image: nginx:alpine
@@ -806,8 +729,7 @@ volumes:
   mysql-data:
 ```
 
-### Opciones más usadas en un servicio
-
+### **Opciones más usadas en un servicio**
 | Opción | Descripción |
 |---|---|
 | `image` | Imagen Docker a usar |
@@ -824,52 +746,7 @@ volumes:
 | `entrypoint` | Sobreescribe el ENTRYPOINT de la imagen |
 | `healthcheck` | Comando para verificar el estado del servicio |
 
-### Comandos de Docker Compose
-
-```bash
-# Iniciar todos los servicios (en segundo plano)
-docker compose up -d
-
-# Iniciar y reconstruir imágenes si hay cambios
-docker compose up -d --build
-
-# Ver servicios en ejecución
-docker compose ps
-
-# Ver logs de todos los servicios
-docker compose logs
-docker compose logs -f              # seguir en tiempo real
-docker compose logs web             # solo del servicio 'web'
-
-# Detener servicios (sin eliminar)
-docker compose stop
-
-# Detener y eliminar contenedores, redes y volúmenes
-docker compose down
-docker compose down -v              # también elimina volúmenes
-
-# Reiniciar un servicio
-docker compose restart web
-
-# Escalar un servicio (múltiples instancias)
-docker compose up -d --scale web=3
-
-# Ejecutar un comando en un servicio
-docker compose exec web bash
-docker compose exec db psql -U user midb
-
-# Ver configuración resuelta (variables interpoladas)
-docker compose config
-
-# Construir imágenes sin iniciar
-docker compose build
-
-# Eliminar todo (contenedores, redes, imágenes y volúmenes)
-docker compose down --rmi all -v
-```
-
-### Tabla de comandos de Docker Compose
-
+### **Comandos de Docker Compose**
 | Comando | Descripción |
 |---|---|
 | `docker compose up` | Crea e inicia todos los servicios |
@@ -885,8 +762,26 @@ docker compose down --rmi all -v
 | `docker compose config` | Valida y muestra la configuración |
 | `docker compose scale` | Escala el número de instancias de un servicio |
 
-### Buenas prácticas con Docker Compose
 
+```bash
+docker compose up -d          # Iniciar todos los servicios (en segundo plano)
+docker compose up -d --build  # Iniciar y reconstruir imágenes si hay cambios
+docker compose ps             # Ver servicios en ejecución
+# ----------
+docker compose logs           # Ver logs de todos los servicios
+docker compose logs -f        # seguir en tiempo real
+docker compose logs web       # solo del servicio 'web'
+# ----------
+docker compose stop           # Detener servicios (sin eliminar)
+docker compose restart web    # Reiniciar un servicio
+docker compose exec web bash  # Ejecutar un comando en un servicio
+# ----------
+docker compose down               # Detener y eliminar contenedores y redes
+docker compose down -v            # también elimina volúmenes
+docker compose down --rmi all -v  # Eliminar todo (contenedores, redes, imágenes y volúmenes
+```
+
+### **Buenas prácticas con Docker Compose**
 1. **Usar archivos `.env`** para las variables sensibles (contraseñas, claves API).
 2. **Definir políticas de reinicio** (`restart: unless-stopped`) en producción.
 3. **Usar `healthcheck`** para que `depends_on` espere a que el servicio esté realmente listo.
@@ -894,21 +789,8 @@ docker compose down --rmi all -v
 5. **Definir redes explícitas** en lugar de usar la red por defecto.
 6. **Nombrar los volúmenes** para facilitar su gestión e identificación.
 
-```yaml
-# Ejemplo de healthcheck
-db:
-  image: postgres:15
-  healthcheck:
-    test: ["CMD-SHELL", "pg_isready -U postgres"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
-```
-
----
-
 ## Resumen de comandos esenciales
-
+---
 ```bash
 # ── IMÁGENES ──────────────────────────────────────
 docker pull nginx:alpine            # Descargar imagen
@@ -946,8 +828,8 @@ docker compose logs -f              # Ver logs
 docker compose exec web bash        # Terminal en servicio
 ```
 
+## Referencias
 ---
-
 > 📚 **Documentación oficial:** https://docs.docker.com  
 > 🐳 **Docker Hub:** https://hub.docker.com  
 > 🔧 **Referencia Dockerfile:** https://docs.docker.com/engine/reference/builder/  
