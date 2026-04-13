@@ -11,6 +11,8 @@ WSL es una característica de Windows que permite ejecutar un entorno Linux dire
 
 ### **Activación y puesta en marcha**
 
+### **``Activación y puesta en marcha``**
+
 >#### 👉 Paso 1 — Activar características de Windows
  
 Abrir **Características de Windows** y activar:
