@@ -4,17 +4,6 @@ weight: 2
 ---
 # 🐳 Docker: Guía Completa de Contenedores
 
-## Índice
----
-1. [Introducción a los Contenedores](#introducción-a-los-contenedores)
-2. [¿Qué es Docker?](#qué-es-docker)
-3. [Imágenes](#imágenes)
-4. [Contenedores](#contenedores)
-5. [Redes](#redes)
-6. [Volúmenes](#volúmenes)
-7. [Dockerfile](#dockerfile)
-8. [Docker Compose](#docker-compose)
-
 ## ¿Qué es un contenedor?
 ---
 No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de **incompatibilidad de entornos**.
@@ -247,7 +236,7 @@ Columnas que muestra `docker ps -a`:
 ---
 Las redes Docker permiten definir **cómo se comunican los contenedores** entre sí y con el exterior. El componente principal que gestiona la conectividad es **libnetwork**.
 
-### Tipos de redes en Docker
+### **Tipos de redes en Docker**
 
 #### ``1. Bridge (por defecto)``
 Red puente, es la red predeterminada para los contenedores. Proporciona aislamiento básico y permite la comunicación entre contenedores en el mismo host. Los contenedores pueden referenciarse por nombre y se pueden exponer puertos al host.

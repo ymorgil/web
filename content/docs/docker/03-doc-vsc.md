@@ -1,5 +1,5 @@
 ---
-title: "Docker: Guía Completa de Contenedores"
+title: "Docker: VSC"
 weight: 3
 ---
 # Ejercicio: Programar en Contenedores Docker con VS Code
