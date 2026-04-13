@@ -3,13 +3,15 @@ title: "Entorno (WSL y Docker)"
 weight: 1
 ---
 
+# Entorno (WSL y Docker)
+
 ## WSL (Windows Subsystem for Linux)
 ---
 WSL es una característica de Windows que permite ejecutar un entorno Linux directamente sobre Windows, sin necesidad de una máquina virtual ni de arranque dual. Gracias a WSL es posible usar herramientas de línea de comandos de Linux, ejecutar scripts Bash y trabajar con aplicaciones Linux integradas en el flujo de trabajo de Windows.
 
 ### **Activación y puesta en marcha**
 
-#### 👉 Paso 1 — Activar características de Windows
+>#### 👉 Paso 1 — Activar características de Windows
  
 Abrir **Características de Windows** y activar:
  

@@ -1,6 +1,6 @@
 ---
 title: "Docker: Guía Completa de Contenedores"
-weight: 1
+weight: 2
 ---
 # 🐳 Docker: Guía Completa de Contenedores
 
