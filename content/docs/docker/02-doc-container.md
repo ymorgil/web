@@ -15,37 +15,22 @@ weight: 2
 7. [Dockerfile](#dockerfile)
 8. [Docker Compose](#docker-compose)
 
-## Introducción a los Contenedores
+## ¿Qué es un contenedor?
 ---
 No todos los programas son compatibles con todos los sistemas operativos. Cada vez que un programa es compilado, se hace para un sistema determinado (Windows, Linux, Mac, etc.), lo que genera el clásico problema de **incompatibilidad de entornos**.
 
 Para los desarrolladores esto supone un problema constante: en un equipo de trabajo con sistemas heterogéneos, cada uno necesita las mismas dependencias instaladas, con las mismas versiones, lo que desemboca en el conocido problema de **"en mi máquina funciona"**.
 
-### **¿Qué es un contenedor?**
-
 Un contenedor es una **unidad ligera y portátil** que permite empaquetar una aplicación junto con todas sus dependencias (bibliotecas, configuraciones y binarios) en un entorno aislado.
 
 A diferencia de las máquinas virtuales, los contenedores **no incluyen un sistema operativo completo**: comparten el núcleo (kernel) del sistema operativo del anfitrión, lo que los hace más eficientes en consumo de recursos (memoria y CPU).
 
-### **Contenedor vs. Máquina Virtual**
-
-| Característica | Contenedor | Máquina Virtual |
-|---|---|---|
-| Virtualización | Nivel de SO (kernel compartido) | Hardware completo |
-| SO propio | No (comparte el kernel) | Sí, uno por instancia |
-| Peso | Ligero (MB) | Pesado (GB) |
-| Tiempo de inicio | Casi instantáneo | Minutos |
-| Aislamiento | Proceso/aplicación | Sistema completo |
-| Eficiencia de recursos | Alta | Menor |
-
-### **Beneficios de los contenedores**
-
+#### ``Beneficios de los contenedores``
 - **Portabilidad:** Al empaquetar la aplicación con todas sus dependencias, se elimina la posibilidad de problemas relacionados con configuraciones del SO, bibliotecas o versiones de software. Un contenedor funciona igual en local, en staging y en producción.
 - **Eficiencia:** Comparten el núcleo del SO anfitrión en lugar de requerir un sistema operativo completo para cada instancia. El tiempo de arranque es casi instantáneo y el consumo de CPU/memoria/almacenamiento es mínimo comparado con las VMs.
 - **Escalabilidad:** Ideales para arquitecturas de microservicios. Cada servicio se ejecuta en su propio contenedor y se puede escalar de forma independiente. Combinados con orquestadores como Kubernetes, permiten la gestión automatizada de la escalabilidad horizontal y vertical.
 
-### **Breve historia**
-
+#### ``Breve historia``
 | Año | Hito |
 |---|---|
 | ~1970s | `chroot` en UNIX: primer concepto de aislamiento de procesos |
@@ -55,31 +40,21 @@ A diferencia de las máquinas virtuales, los contenedores **no incluyen un siste
 | 2020+ | Alternativas como **Podman** emergen: sin daemon, ejecución rootless |
 | Actualidad | Componente esencial de la infraestructura moderna, microservicios y DevOps |
 
+### **Contenedor vs. Máquina Virtual**
+| Característica | Contenedor | Máquina Virtual |
+|---|---|---|
+| Virtualización | Nivel de SO (kernel compartido) | Hardware completo |
+| SO propio | No (comparte el kernel) | Sí, uno por instancia |
+| Peso | Ligero (MB) | Pesado (GB) |
+| Tiempo de inicio | Casi instantáneo | Minutos |
+| Aislamiento | Proceso/aplicación | Sistema completo |
+| Eficiencia de recursos | Alta | Menor |
 
-
-## ¿Qué es Docker?
+## Docker
 ---
-Docker es la **plataforma de contenedores más popular del mundo**. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft.
+Docker es la **plataforma de contenedores más popular del mundo**. Facilita la creación, distribución y ejecución de aplicaciones en contenedores. Ha contado con el apoyo de grandes empresas como Red Hat, Google, IBM y Microsoft. Docker sigue una arquitectura **cliente-servidor**:
 
-### Arquitectura de Docker
-
-Docker sigue una arquitectura **cliente-servidor**:
-
-```
-┌─────────────┐        REST API        ┌──────────────────────────────┐
-│  Docker CLI │ ────────────────────▶ │        Docker Daemon         │
-│  (cliente)  │                        │          (dockerd)           │
-└─────────────┘                        │                              │
-                                       │  ┌──────────┐ ┌──────────┐  │
-                                       │  │Contenedor│ │Contenedor│  │
-                                       │  └──────────┘ └──────────┘  │
-                                       │  ┌──────────┐ ┌──────────┐  │
-                                       │  │ Imágenes │ │Volúmenes │  │
-                                       │  └──────────┘ └──────────┘  │
-                                       └──────────────────────────────┘
-```
-
-### **Componentes principales**
+**Componentes principales**
 
 **Docker Engine** es el núcleo de la plataforma y está compuesto por:
 - **Daemon de Docker (`dockerd`):** servicio en segundo plano que gestiona imágenes, contenedores, redes y volúmenes. Responde a las solicitudes del cliente.
@@ -254,7 +229,7 @@ docker cp ./index.html mi-nginx:/usr/share/nginx/html/
 docker container prune  # Eliminar todos los contenedores parados
 ```
 
-### **Información del comando `docker ps`**
+### **Comando `docker ps`**
 
 Columnas que muestra `docker ps -a`:
 
@@ -267,8 +242,6 @@ Columnas que muestra `docker ps -a`:
 | `STATUS` | Estado actual y tiempo en ese estado |
 | `PORTS` | Mapeo de puertos |
 | `NAMES` | Nombre del contenedor (aleatorio si no se especifica) |
-
-
 
 ## Redes
 ---
@@ -299,19 +272,18 @@ Asigna una dirección MAC propia a cada contenedor, haciéndolos aparecer como d
 #### 5. None
 Desactiva completamente la conectividad de red del contenedor. Útil para tareas de procesamiento aislado sin necesidad de red.
 
-### Redes personalizadas (recomendado)
-
+#### 6. Redes personalizadas (recomendado)
 Las redes bridge personalizadas son **la práctica recomendada** ya que ofrecen:
 - **Resolución DNS automática** entre contenedores por nombre.
 - Mejor aislamiento que la red bridge por defecto.
 - Mayor control sobre la subnet y el gateway.
 
 ```bash
-# Crear una red personalizada
-docker network create mi-red
 
-# Crear red con subnet específica
-docker network create --driver bridge --subnet 172.20.0.0/16 mi-red
+docker network create mi-red  # Crear una red personalizada
+
+
+docker network create --driver bridge --subnet 172.20.0.0/16 mi-red # Crear red con subnet específica
 
 # Conectar contenedores a la red personalizada
 docker run -d --name app --network mi-red mi-app
@@ -334,31 +306,24 @@ docker run -d --name db --network mi-red postgres
 
 
 ```bash
-# Listar todas las redes
-docker network ls
+docker network ls # Listar todas las redes
 
-# Crear una red
-docker network create mi-red
+docker network create mi-red  # Crear una red
 docker network create --driver overlay mi-overlay   # tipo overlay
 
-# Información detallada de una red
-docker network inspect mi-red
+docker network inspect mi-red # Información detallada de una red
 docker network inspect bridge                       # red por defecto
 
-# Conectar un contenedor a una red (en caliente)
-docker network connect mi-red mi-contenedor
+docker network connect mi-red mi-contenedor # Conectar un contenedor a una red (en caliente)
 
-# Desconectar un contenedor de una red
-docker network disconnect mi-red mi-contenedor
+docker network disconnect mi-red mi-contenedor  # Desconectar un contenedor de una red
 
-# Eliminar una red
-docker network rm mi-red
+docker network rm mi-red  # Eliminar una red
 
-# Eliminar todas las redes no utilizadas
-docker network prune
+docker network prune  # Eliminar todas las redes no utilizadas
 ```
 
-### Publicación de puertos
+### **Publicación de puertos**
 
 ```bash
 # Mapear puerto del host al contenedor
@@ -371,23 +336,21 @@ docker run -P nginx                   # mapeo automático de todos los puertos e
 ## Volúmenes
 ---
 Un volumen Docker permite **conservar los datos más allá del ciclo de vida de un contenedor**. Sin volúmenes, todos los datos generados dentro de un contenedor se pierden cuando este se elimina.
-
-### Casos de uso
-
+**Casos de uso:**
 - **Transferir datos** a un contenedor.
 - **Guardar datos persistentes** (bases de datos, logs, configuraciones).
 - **Compartir datos** entre múltiples contenedores.
 
-### Tipos de almacenamiento en Docker
+### **Tipos de almacenamiento en Docker**
 
-#### 1. Volumes (volúmenes gestionados por Docker)
+#### ``1. Volumes (volúmenes gestionados por Docker)``
 Son la opción **recomendada**. Docker gestiona su ubicación en el sistema de archivos del host (`/var/lib/docker/volumes/`). Son independientes del contenedor.
 
 ```bash
 docker run -d -v mi-volumen:/var/lib/postgresql/data postgres
 ```
 
-#### 2. Bind Mounts (montajes de enlace)
+#### ``2. Bind Mounts (montajes de enlace)``
 Montan un directorio o archivo específico del host dentro del contenedor. Útiles en desarrollo para reflejar cambios del código fuente en tiempo real.
 
 ```bash
@@ -395,14 +358,14 @@ docker run -d -v /ruta/en/host:/ruta/en/contenedor nginx
 docker run -d -v $(pwd)/html:/usr/share/nginx/html nginx
 ```
 
-#### 3. tmpfs Mounts
+#### ``3. tmpfs Mounts``
 Almacenamiento temporal en memoria RAM. Los datos no se persisten y desaparecen cuando el contenedor para. Útil para datos sensibles que no deben persistir en disco.
 
 ```bash
 docker run -d --tmpfs /tmp nginx
 ```
 
-### Características de los volúmenes
+### **Características de los volúmenes**
 
 - **Persistencia de datos:** Los datos sobreviven a la eliminación del contenedor.
 - **Compartir datos entre contenedores:** Varios contenedores pueden montar el mismo volumen simultáneamente.
@@ -411,7 +374,7 @@ docker run -d --tmpfs /tmp nginx
 - **Flexibilidad:** Volúmenes con nombre, anónimos o gestionados externamente (NFS, cloud storage...).
 - **Escalabilidad:** Facilitan la distribución de datos en entornos orquestados.
 
-### Comandos de volúmenes
+### **Comandos de volúmenes**
 | Comando | Descripción |
 |---|---|
 | `docker volume create` | Crea un nuevo volumen |
@@ -421,26 +384,19 @@ docker run -d --tmpfs /tmp nginx
 | `docker volume prune` | Elimina volúmenes no utilizados |
 
 ```bash
-# Crear un volumen
-docker volume create mi-volumen
+docker volume create mi-volumen # Crear un volumen
 
-# Listar volúmenes
-docker volume ls
+docker volume ls  # Listar volúmenes
 
-# Información detallada de un volumen
-docker volume inspect mi-volumen
+docker volume inspect mi-volumen  # Información detallada de un volumen
 
-# Eliminar un volumen
-docker volume rm mi-volumen
+docker volume rm mi-volumen # Eliminar un volumen
 
-# Eliminar todos los volúmenes no utilizados
-docker volume prune
+docker volume prune # Eliminar todos los volúmenes no utilizados
 
-# Usar un volumen al crear un contenedor (sintaxis -v)
-docker run -d -v mi-volumen:/datos mi-app
+docker run -d -v mi-volumen:/datos mi-app # Usar un volumen al crear un contenedor (sintaxis -v)
 
-# Usar un volumen al crear un contenedor (sintaxis --mount, más explícita)
-docker run -d --mount source=mi-volumen,target=/datos mi-app
+docker run -d --mount source=mi-volumen,target=/datos mi-app  # Usar un volumen al crear un contenedor (sintaxis --mount, más explícita)
 
 # Contenedor de solo lectura
 docker run -d -v mi-volumen:/datos:ro mi-app
@@ -630,7 +586,23 @@ build
 - Testing e integración continua.
 - Despliegues en entornos sencillos (staging, desarrollo).
 
-### **Estructura del archivo `docker-compose.yml`**
+### **Estructura del archivo**
+**Opciones más usadas en un servicio**
+| Opción | Descripción |
+|---|---|
+| `image` | Imagen Docker a usar |
+| `build` | Directorio o config para construir la imagen |
+| `container_name` | Nombre del contenedor |
+| `ports` | Mapeo de puertos (`host:contenedor`) |
+| `volumes` | Montaje de volúmenes o bind mounts |
+| `environment` | Variables de entorno |
+| `env_file` | Archivo `.env` con variables de entorno |
+| `depends_on` | Orden de inicio (espera a que otro servicio esté listo) |
+| `networks` | Redes a las que se conecta |
+| `restart` | Política de reinicio (`no`, `always`, `unless-stopped`, `on-failure`) |
+| `command` | Sobreescribe el CMD de la imagen |
+| `entrypoint` | Sobreescribe el ENTRYPOINT de la imagen |
+| `healthcheck` | Comando para verificar el estado del servicio |
 
 ```yaml
 services:              # Definición de los contenedores
@@ -650,8 +622,9 @@ networks:              # Definición de redes
   nombre-red:
 ```
 
-### **Ejemplo completo: Aplicación web + Base de datos**
+### **Ejemplos**
 ```yaml
+# Aplicación web + Base de datos (con un Dockerfile)
 services:
   web:
     build: .                # Construye desde el Dockerfile del directorio actual
@@ -698,9 +671,8 @@ networks:
     driver: bridge
 ```
 
-### **Ejemplo: Nginx + PHP-FPM + MySQL**
-
 ```yaml
+# Nginx + PHP-FPM + MySQL
 services:
   nginx:
     image: nginx:alpine
@@ -728,23 +700,6 @@ services:
 volumes:
   mysql-data:
 ```
-
-### **Opciones más usadas en un servicio**
-| Opción | Descripción |
-|---|---|
-| `image` | Imagen Docker a usar |
-| `build` | Directorio o config para construir la imagen |
-| `container_name` | Nombre del contenedor |
-| `ports` | Mapeo de puertos (`host:contenedor`) |
-| `volumes` | Montaje de volúmenes o bind mounts |
-| `environment` | Variables de entorno |
-| `env_file` | Archivo `.env` con variables de entorno |
-| `depends_on` | Orden de inicio (espera a que otro servicio esté listo) |
-| `networks` | Redes a las que se conecta |
-| `restart` | Política de reinicio (`no`, `always`, `unless-stopped`, `on-failure`) |
-| `command` | Sobreescribe el CMD de la imagen |
-| `entrypoint` | Sobreescribe el ENTRYPOINT de la imagen |
-| `healthcheck` | Comando para verificar el estado del servicio |
 
 ### **Comandos de Docker Compose**
 | Comando | Descripción |
@@ -778,10 +733,10 @@ docker compose exec web bash  # Ejecutar un comando en un servicio
 # ----------
 docker compose down               # Detener y eliminar contenedores y redes
 docker compose down -v            # también elimina volúmenes
-docker compose down --rmi all -v  # Eliminar todo (contenedores, redes, imágenes y volúmenes
+docker compose down --rmi all -v  # Eliminar todo (container, redes, imágenes y volúmenes)
 ```
 
-### **Buenas prácticas con Docker Compose**
+**Buenas prácticas con Docker Compose**
 1. **Usar archivos `.env`** para las variables sensibles (contraseñas, claves API).
 2. **Definir políticas de reinicio** (`restart: unless-stopped`) en producción.
 3. **Usar `healthcheck`** para que `depends_on` espere a que el servicio esté realmente listo.

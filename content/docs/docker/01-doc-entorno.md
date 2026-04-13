@@ -26,17 +26,12 @@ Abrir **PowerShell** como administrador y ejecutar:
 winget install Microsoft.WSL  # Instalar WSL con winget
 wsl --version  # Comprobar la instalación
 wsl --install -d Ubuntu-24.04  # Instalar Ubuntu 24.04
-wsl --list --online # Si no aparece esa versión, listar las disponibles con:
+wsl --list --online # Si no aparece esa versión, listar las disponibles
 ```
 
 La primera vez que arranque Ubuntu, el sistema solicitará crear:
 - **Usuario** → nombre de usuario Linux
 - **Contraseña** → se usará para `sudo`
-Una vez dentro de Ubuntu, actualizar los paquetes:
-
-```bash
-sudo apt update && sudo apt upgrade -y && apt autoremove
-```
 
 ### **Terminal de Windows**
  
@@ -46,26 +41,31 @@ Su principal ventaja es que permite abrir múltiples pestañas con diferentes en
 
 ![terminal](/web/docker/img/docker02.png)
 
+Una vez dentro de Ubuntu, actualizar los paquetes:
+```bash
+sudo apt update && sudo apt upgrade -y && apt autoremove
+```
+
 ## Docker
 ---
 Docker es una plataforma de contenedores que permite empaquetar aplicaciones junto con todas sus dependencias en unidades aisladas y portables llamadas **contenedores**. A diferencia de las máquinas virtuales, los contenedores comparten el kernel del sistema operativo, lo que los hace mucho más ligeros y rápidos de arrancar.
  
 ### **Instalación de Docker Desktop e integración con WSL**
  
-#### ``Instalar Docker Desktop con winget``
+#### ``👉 Instalar Docker Desktop con winget``
  
 ```powershell
 winget install Docker.DockerDesktop
 ```
  
-#### ``Configurar la integración con WSL``
+#### ``👉 Configurar la integración con WSL``
  
 1. Iniciar **Docker Desktop** desde el menú de inicio.
 2. Esperar a que termine la configuración inicial.
 3. Ir a: **Settings → Resources → WSL Integration**
 4. Activar: **Ubuntu-24.04**
  
-##### ``Comprobar Docker desde Ubuntu``
+##### ``👉Comprobar Docker desde Ubuntu``
  
 ```bash
 docker --version # Verificar la versión instalada
