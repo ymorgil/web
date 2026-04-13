@@ -159,7 +159,7 @@ Un contenedor es una **instancia ejecutable de una imagen**. Se crea a partir de
 - Cuando se elimina un contenedor, **se pierden los datos** que no estén en un volumen persistente.
 - Se puede conectar a redes, adjuntar volúmenes y publicar puertos.
 
-### Comandos de contenedores
+### **Comandos de contenedores**
 
 | Comando | Descripción |
 |---|---|
@@ -249,39 +249,37 @@ Las redes Docker permiten definir **cómo se comunican los contenedores** entre 
 
 ### Tipos de redes en Docker
 
-#### 1. Bridge (por defecto)
+#### ``1. Bridge (por defecto)``
 Red puente, es la red predeterminada para los contenedores. Proporciona aislamiento básico y permite la comunicación entre contenedores en el mismo host. Los contenedores pueden referenciarse por nombre y se pueden exponer puertos al host.
 
 ```bash
 docker run -d --name web --network bridge -p 8080:80 nginx
 ```
 
-#### 2. Host
+#### ``2. Host``
 Elimina el aislamiento de red entre el contenedor y el host. El contenedor comparte directamente la interfaz de red del sistema, usando la misma IP. Mejor rendimiento pero mayor riesgo de conflicto de puertos.
 
 ```bash
 docker run -d --network host nginx
 ```
 
-#### 3. Overlay
+#### ``3. Overlay``
 Utilizada para contenedores distribuidos en **diferentes hosts**. Es la red usada en entornos de **Docker Swarm** para comunicar servicios entre nodos.
 
-#### 4. Macvlan
+#### ``4. Macvlan``
 Asigna una dirección MAC propia a cada contenedor, haciéndolos aparecer como dispositivos físicos en la red. Útil para aplicaciones que necesitan estar directamente en la red LAN.
 
-#### 5. None
+#### ``5. None``
 Desactiva completamente la conectividad de red del contenedor. Útil para tareas de procesamiento aislado sin necesidad de red.
 
-#### 6. Redes personalizadas (recomendado)
+#### ``6. Redes personalizadas (recomendado)``
 Las redes bridge personalizadas son **la práctica recomendada** ya que ofrecen:
 - **Resolución DNS automática** entre contenedores por nombre.
 - Mejor aislamiento que la red bridge por defecto.
 - Mayor control sobre la subnet y el gateway.
 
 ```bash
-
 docker network create mi-red  # Crear una red personalizada
-
 
 docker network create --driver bridge --subnet 172.20.0.0/16 mi-red # Crear red con subnet específica
 
@@ -293,7 +291,6 @@ docker run -d --name db --network mi-red postgres
 ```
 
 ### **Comandos de redes**
-
 | Comando | Descripción |
 |---|---|
 | `docker network ls` | Lista todas las redes |
@@ -398,8 +395,7 @@ docker run -d -v mi-volumen:/datos mi-app # Usar un volumen al crear un contened
 
 docker run -d --mount source=mi-volumen,target=/datos mi-app  # Usar un volumen al crear un contenedor (sintaxis --mount, más explícita)
 
-# Contenedor de solo lectura
-docker run -d -v mi-volumen:/datos:ro mi-app
+docker run -d -v mi-volumen:/datos:ro mi-app  # Contenedor de solo lectura
 ```
 
 
@@ -407,14 +403,7 @@ docker run -d -v mi-volumen:/datos:ro mi-app
 ---
 Un **Dockerfile** es un archivo de texto con una serie de instrucciones que Docker utiliza para construir una imagen de forma automatizada y reproducible. Cada instrucción genera una nueva **capa** en la imagen.
 
-### Estructura básica
-
-```dockerfile
-# Comentario
-INSTRUCCIÓN argumento
-```
-
-### Instrucciones del Dockerfile
+### **Instrucciones del Dockerfile**
 
 | Instrucción | Descripción |
 |---|---|
@@ -436,9 +425,9 @@ INSTRUCCIÓN argumento
 | `HEALTHCHECK` | Define un comando para comprobar el estado de salud del contenedor. |
 | `STOPSIGNAL` | Define la señal de sistema para detener el contenedor. |
 
-### Ejemplos de Dockerfile
+### **Ejemplos**
 
-#### Ejemplo 1: Aplicación Python simple
+#### ``Ejemplo 1: Aplicación Python simple``
 
 ```dockerfile
 # Imagen base oficial de Python
@@ -474,7 +463,7 @@ USER appuser
 CMD ["python", "app.py"]
 ```
 
-#### Ejemplo 2: Servidor web Nginx con contenido personalizado
+#### ``Ejemplo 2: Servidor web Nginx con contenido personalizado``
 
 ```dockerfile
 FROM nginx:alpine
@@ -490,7 +479,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-#### Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)
+#### ``Ejemplo 3: Imagen con Alpine y Python (ejemplo del temario)``
 
 ```dockerfile
 FROM alpine:latest
@@ -502,7 +491,7 @@ RUN ln -sf python3 /usr/bin/python
 CMD ["python3"]
 ```
 
-#### Ejemplo 4: Multi-stage build (construcción en múltiples etapas)
+#### ``Ejemplo 4: Multi-stage build (construcción en múltiples etapas)``
 
 Técnica avanzada para reducir el tamaño de la imagen final:
 
@@ -522,7 +511,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-### Comandos para construir imágenes
+### **Comandos para construir imágenes**
 
 ```bash
 # Construir imagen desde el directorio actual (busca Dockerfile)
@@ -540,9 +529,7 @@ docker build --no-cache -t mi-app:1.0 .
 # Ver las capas generadas
 docker history mi-app:1.0
 ```
-
-### Buenas prácticas en Dockerfile
-
+**Buenas prácticas en Dockerfile**
 1. **Usar imágenes base oficiales y ligeras** (alpine, slim).
 2. **Ordenar las instrucciones por frecuencia de cambio** (lo que menos cambia, al principio) para aprovechar la caché.
 3. **Minimizar el número de capas** combinando comandos RUN con `&&`.
@@ -557,21 +544,6 @@ docker history mi-app:1.0
 RUN apt-get update && \
     apt-get install -y curl git && \
     rm -rf /var/lib/apt/lists/*
-```
-
-### El archivo .dockerignore
-
-Similar al `.gitignore`, excluye archivos y directorios del contexto de construcción:
-
-```
-node_modules
-.git
-.env
-*.log
-__pycache__
-.pytest_cache
-dist
-build
 ```
 
 > 📖 Documentación oficial de referencia: https://docs.docker.com/engine/reference/builder/
