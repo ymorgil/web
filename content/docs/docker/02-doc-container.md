@@ -420,11 +420,19 @@ docker history mi-app:1.0                             # Ver las capas generadas
 ## Docker Compose
 ---
 **Docker Compose** es una herramienta para **definir y ejecutar aplicaciones Docker multi-contenedor** mediante un archivo YAML (`docker-compose.yml`). Con un solo comando se crean e inician todos los servicios de la aplicación.
+
 **Casos de uso**
 - Aplicaciones con varios servicios (frontend + backend + base de datos + cache...).
 - Entornos de desarrollo reproducibles.
 - Testing e integración continua.
 - Despliegues en entornos sencillos (staging, desarrollo).
+**Buenas prácticas con Docker Compose**
+1. **Usar archivos `.env`** para las variables sensibles (contraseñas, claves API).
+2. **Definir políticas de reinicio** (`restart: unless-stopped`) en producción.
+3. **Usar `healthcheck`** para que `depends_on` espere a que el servicio esté realmente listo.
+4. **Separar configuraciones por entorno**: `docker-compose.yml` (base) + `docker-compose.override.yml` (desarrollo) + `docker-compose.prod.yml` (producción).
+5. **Definir redes explícitas** en lugar de usar la red por defecto.
+6. **Nombrar los volúmenes** para facilitar su gestión e identificación.
 
 ### **Estructura del archivo**
 ```yaml
@@ -432,77 +440,39 @@ docker history mi-app:1.0                             # Ver las capas generadas
 services:                 # Sección principal donde defines tus contenedores
   nombre-servicio:
     image: node:18-alpine # Imagen Docker a usar (desde Docker Hub o registro)   
-    build: .              # Directorio o configuración para construir tu propia imagen desde un Dockerfile
-    container_name: app   # Nombre personalizado para el contenedor (evita nombres aleatorios)
+    build: .              # Directorio para construir tu propia imagen (Dockerfile)
+    container_name: app   # Nombre personalizado para el contenedor
     ports:                # Mapeo de puertos: "anfitrión:contenedor"
       - "8080:3000"      
-    volumes:              # Montaje de volúmenes persistentes o carpetas compartidas (bind mounts)
+    volumes:              # Montaje de volúmenes persistentes o carpetas compartidas
       - ./data:/app/data  # "anfitrión:contenedor"      
     environment:          # Variables de entorno directamente en el archivo
       - NODE_ENV=production      
-    env_file:             # Carga variables de entorno desde un archivo externo (ej: .env)
+    env_file:             # Carga variables de entorno desde un archivo externo 
       - .env      
-    depends_on:           # Orden de inicio: espera a que otros servicios arranquen antes
+    depends_on:           # Orden de inicio: espera a que otros servicios arranquen 
       - db      
-    networks:             # Redes específicas a las que se debe conectar este servicio
+    networks:             # Redes a las que se debe conectar este servicio
       - mi-red      
-    restart: always       # Política de reinicio: no, always, unless-stopped, on-failure    
+    restart: always       # Reinicio (no, always, unless-stopped, on-failure)
     command: npm start    # Sobreescribe el comando por defecto (CMD) de la imagen    
-    entrypoint: /app.sh   # Sobreescribe el punto de entrada principal (ENTRYPOINT) de la imagen    
-    healthcheck:          # Comando para verificar si el servicio está sano y funcionando
+    entrypoint: /app.sh   # Sobreescribe el punto de entrada principal de la imagen    
+    healthcheck:          # Comando para verificar si el servicio está sano
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 1m30s
       timeout: 10s
       retries: 3
 
-volumes:                  # Sección para declarar volúmenes con nombre (persistencia gestionada por Docker)
+volumes:                  # Declarar volúmenes con nombre (persistencia)
   nombre-volumen:
 
-networks:                 # Sección para definir redes personalizadas (aislamiento de red)
+networks:                 # Definir redes personalizadas (aislamiento de red)
   nombre-red:
 ```
-
-
-**Opciones más usadas en un servicio**
-| Opción | Descripción |
-|---|---|
-| `image` | Imagen Docker a usar |
-| `build` | Directorio o config para construir la imagen |
-| `container_name` | Nombre del contenedor |
-| `ports` | Mapeo de puertos (`host:contenedor`) |
-| `volumes` | Montaje de volúmenes o bind mounts |
-| `environment` | Variables de entorno |
-| `env_file` | Archivo `.env` con variables de entorno |
-| `depends_on` | Orden de inicio (espera a que otro servicio esté listo) |
-| `networks` | Redes a las que se conecta |
-| `restart` | Política de reinicio (`no`, `always`, `unless-stopped`, `on-failure`) |
-| `command` | Sobreescribe el CMD de la imagen |
-| `entrypoint` | Sobreescribe el ENTRYPOINT de la imagen |
-| `healthcheck` | Comando para verificar el estado del servicio |
-
-```yaml
-services:              # Definición de los contenedores
-  nombre-servicio:
-    image: ...
-    container_name:
-    build: ...
-    ports: ...
-    volumes: ...
-    environment: ...
-    networks: ...
-    depends_on: ...
-    restart:
-
-volumes:               # Definición de volúmenes
-  nombre-volumen:
-
-networks:              # Definición de redes
-  nombre-red:
-```
-
 ### **Ejemplos**
+
+#### ``Aplicación web + Base de datos (con un Dockerfile)``
 ```yaml
-# Aplicación web + Base de datos (con un Dockerfile)
 services:
   web:
     build: .                # Construye desde el Dockerfile del directorio actual
@@ -548,9 +518,8 @@ networks:
   app-network:
     driver: bridge
 ```
-
+#### ``Aplicación web con Nginx + PHP-FPM + MySQL``
 ```yaml
-# Nginx + PHP-FPM + MySQL
 services:
   nginx:
     image: nginx:alpine
@@ -580,47 +549,29 @@ volumes:
 ```
 
 ### **Comandos de Docker Compose**
-| Comando | Descripción |
-|---|---|
-| `docker compose up` | Crea e inicia todos los servicios |
-| `docker compose down` | Para y elimina contenedores y redes |
-| `docker compose ps` | Lista los servicios en ejecución |
-| `docker compose logs` | Muestra los logs de los servicios |
-| `docker compose build` | Construye o reconstruye las imágenes |
-| `docker compose start` | Inicia servicios parados |
-| `docker compose stop` | Para servicios sin eliminarlos |
-| `docker compose restart` | Reinicia los servicios |
-| `docker compose exec` | Ejecuta un comando en un servicio activo |
-| `docker compose pull` | Descarga las imágenes de los servicios |
-| `docker compose config` | Valida y muestra la configuración |
-| `docker compose scale` | Escala el número de instancias de un servicio |
-
-
 ```bash
-docker compose up -d          # Iniciar todos los servicios (en segundo plano)
-docker compose up -d --build  # Iniciar y reconstruir imágenes si hay cambios
-docker compose ps             # Ver servicios en ejecución
-# ----------
-docker compose logs           # Ver logs de todos los servicios
-docker compose logs -f        # seguir en tiempo real
-docker compose logs web       # solo del servicio 'web'
-# ----------
-docker compose stop           # Detener servicios (sin eliminar)
-docker compose restart web    # Reiniciar un servicio
-docker compose exec web bash  # Ejecutar un comando en un servicio
-# ----------
+# Gestión de Ciclo de Vida
+docker compose up -d              # Iniciar todos los servicios (en segundo plano)
+docker compose up -d --build      # Iniciar y reconstruir imágenes si hay cambios
 docker compose down               # Detener y eliminar contenedores y redes
 docker compose down -v            # también elimina volúmenes
-docker compose down --rmi all -v  # Eliminar todo (container, redes, imágenes y volúmenes)
+docker compose start              # Inicia servicios que ya estaban creados pero parados
+docker compose restart            # Reinicia los servicios
+docker compose stop               # Detiene los servicios sin eliminarlos
+# Construcción y Preparación
+docker compose build              # Construye o reconstruye las imágenes (si cambias Dockerfile)
+docker compose pull               # Descarga las imágenes de los servicios desde el registro
+docker compose create             # Crea los contenedores pero no los inicia
+# Mantenimiento y Visualización
+docker compose ps                 # Lista el estado de los contenedores del proyecto
+docker compose logs -f            # Muestra los logs de los servicios (en tiempo real)
+docker compose config             # Valida y muestra la configuración final del archivo YAML
+docker compose top                # Muestra los procesos que se ejecutan en cada contenedor
+# Escalado y Ejecución
+docker compose exec servicio bash # Entra a la terminal de un contenedor en ejecución
+docker compose run servicio       # Ejecuta un comando puntual en un servicio nuevo
+docker compose scale servicio=3   # Escala el número de instancias/réplicas de un servicio
 ```
-
-**Buenas prácticas con Docker Compose**
-1. **Usar archivos `.env`** para las variables sensibles (contraseñas, claves API).
-2. **Definir políticas de reinicio** (`restart: unless-stopped`) en producción.
-3. **Usar `healthcheck`** para que `depends_on` espere a que el servicio esté realmente listo.
-4. **Separar configuraciones por entorno**: `docker-compose.yml` (base) + `docker-compose.override.yml` (desarrollo) + `docker-compose.prod.yml` (producción).
-5. **Definir redes explícitas** en lugar de usar la red por defecto.
-6. **Nombrar los volúmenes** para facilitar su gestión e identificación.
 
 ## Resumen de comandos esenciales
 ---
