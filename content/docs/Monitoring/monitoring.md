@@ -1,6 +1,6 @@
 ---
 title: "Monitorización"
-weight: 2
+weight: 6
 ---
 
 # Monitorización y Observabilidad en Sistemas
@@ -78,8 +78,6 @@ Suele trabajar junto a componentes como **Node Exporter**, ambos forman una base
 
 ### ``prometheus.yml``
 Archivo de configuración principal y el "corazón" de todo el sistema; sin él, ni siquiera sabe qué debe vigilar. Conecta todas las piezas del rompecabezas, dirección IP del Alertmanager para que sepa a dónde enviar los avisos y también donde le das la ruta del archivo ``rules.yml``para que pueda leer las reglas que creaste. Básicamente, es el centro de mando que define cómo se comporta el software, a quién debe espiar para obtener métricas y cómo debe comunicarse con los demás componentes de tu infraestructura.
-
-
 ``` yaml
 # Plantilla
 global:
@@ -100,8 +98,6 @@ alerting:   #Cómo se conectan las alertas
         - targets:
           - 'localhost:9093'
 ```
-
-
 ### ``rules.yml``
 Archivo donde escribes las "instrucciones" para que Prometheus sepa cuándo enviarte un aviso. Imagina que es un manual de condiciones: tú le dices que si el uso de memoria supera el 90% durante más de cinco minutos, debe marcar esa situación como una alerta. Sin este archivo, Prometheus simplemente guardaría datos y gráficas, pero nunca te avisaría de forma automática si algo se rompe o funciona mal.
 ``` yaml
@@ -176,7 +172,7 @@ enabled = true
 org_role = Viewer
 ```
 
-## Alertmanager
+## **Alertmanager**
 ---
 Prometheus es capaz de generar alertas en base a la evaluación de una expresión **PromQL**, que en caso de cumplirse durante un valor determinado (mientras no ha pasado suficiente tiempo, se mantendrán en estado Pending), las enviará a un AlertManager, para que se procesen y se notifique al personal adecuado.
 
